@@ -1,7 +1,14 @@
-```
-
 import random
 import time
+
+#time between random rolls
+Roll_Timer = .75
+
+#time between input requests
+input_timer = .75
+
+#time between sections
+Section_Timer = 2
 
 def roll() :
   return random.randint(1,6)+random.randint(1,6) + random.randint(1,6)
@@ -21,28 +28,27 @@ def get_and_validate_stat(stat):
    
   return stat_value
 
-#Input promp is "Do you want to {text}? 1 for yes 2 for no: ""
+#Input promp is "Do you want to {text}? Yes or No: ""
 def y_n_prompt(text):
  valid_input = False
  
  while valid_input == False:
-   prompt = int(input(f"Do you want to {text}? 1 for yes 2 for no: "))
-  
-   if prompt == 1 :
+   prompt = input(f"Do you want to {text}? Yes or No: ")
+   prompt = prompt.lower()
+
+   if prompt == "yes" or prompt == "y" :
      y_n_answer = True
      valid_input = True
      return y_n_answer
   
-   elif prompt ==  2 :
+   elif prompt ==  "no" or prompt == "n" :
      y_n_answer = False
      valid_input = True
      return y_n_answer
    else:
-     print("Please enter 1 for yes 2 for no: ")
+     print("Please enter Yes No: ")
 
 stats_prompt = y_n_prompt("roll for your stats")
-
-#Some type of validation to confirm they put yet or no is needed here to prevent an error. - SA 1/21/22
 
 #Auto Rolled
 if stats_prompt == True: 
@@ -51,19 +57,19 @@ if stats_prompt == True:
   agility = roll()
   print(f"  Your agility is {agility}.")
  
-  time.sleep(1)
+  time.sleep(Roll_Timer)
   charisma = roll()
   print(f"  Your charisma is {charisma}.")
   
-  time.sleep(1)
+  time.sleep(Roll_Timer)
   intellect = roll()
   print(f"  Your intellect is {intellect}.")
   
-  time.sleep(1)
+  time.sleep(Roll_Timer)
   perception = roll()
   print(f"  Your perception is {perception}.")
   
-  time.sleep(1)
+  time.sleep(Roll_Timer)
   strength = roll()
   print(f"  Your strength is {strength}.")
 
@@ -71,35 +77,35 @@ if stats_prompt == True:
 elif stats_prompt == False:
   print("Ok let's get started. All stats must be from 3 to 18.")
   
-  time.sleep(.5)
+  time.sleep(input_timer)
   #agility =int(input("Enter your Agility stat: "))
   
   agility = get_and_validate_stat("agility")
 
 
-  time.sleep(.5)
+  time.sleep(input_timer)
   #charisma =int(input("Enter your Charisma stat: "))
   
   charisma = get_and_validate_stat("charisma")
 
 
-  time.sleep(.51)
+  time.sleep(input_timer)
   #intellect =int(input("Enter your Intellect stat: "))
 
   intellect = get_and_validate_stat("intellect")
  
-  time.sleep(.5)
+  time.sleep(input_timer)
   #perception =int(input("Enter your Perception stat: "))
 
   perception = get_and_validate_stat("perception")
  
-  time.sleep(.5)
+  time.sleep(input_timer)
   #strength =int(input("Enter your Strength stat: "))
   strength = get_and_validate_stat("strength")
   print("Calculating values now....")
 
 else:
-  print("Please enter 1 or 2.")
+  print("Please enter Yes or No.")
   
 
 def stat_rating_calc(stat):
@@ -125,7 +131,7 @@ def stat_rating_calc(stat):
 
   return stat_rating[stat]
 
-time.sleep(2) 
+time.sleep(Section_Timer) 
 
 #Kin selection Roll 1d12: 1-9 human, 10 halfling, 11 dwarf, 12 elf.
 
@@ -133,7 +139,7 @@ kin_prompt = y_n_prompt("roll for you kin")
 
 if kin_prompt == True:
   print("Great let's see what you are...")
-  time.sleep(1)
+  time.sleep(Roll_Timer)
   kin_roll = random.randint(1,12)
   if kin_roll <=9:
     kin = "human"
@@ -148,18 +154,53 @@ if kin_prompt == True:
     kin = "elf"
     print(f"  You are a {kin}.")    
 if kin_prompt == False:
-  kin = input("Are you a huamn, dwarf, or elf")
+  proper_kin = False
+  while proper_kin == False:
+    kin = input("Are you a huamn, halfling, dwarf, or elf?: ")
+    if kin == "huamn":
+      proper_kin = True
+    elif kin == "halfling":
+      proper_kin = True
+    elif kin == "dwarf":
+      proper_kin = True
+    elif kin == "elf":
+      proper_kin = True
+    else:
+      print("That is not a recognized kin.")      
+time.sleep(Section_Timer)
 
-time.sleep(2)
+background_prompt = y_n_prompt('roll for your backgrounds')
 
-#Determine Background
 
-#Describe your character - Let's make this a madlib that sounds fun
+#Human
+#halfling
+#dwarf
+#elf
+
+time.sleep(Section_Timer)
+
+description_prompt = y_n_prompt('roll for your descriptors')
+
+#Attitude
+#hair
+#face
+#eyes
+#body
+#quirk
+
+time.sleep(Section_Timer)
+
+money_prompt = y_n_prompt('roll for your starting coins')
 
 #Determine HP and Max Heavy
 
-#Determin starting gold
+name_prompt = y_n_prompt('roll for a random name')
 
+time.sleep(Section_Timer)
+
+print("""
+Ok let's get this all together
+""")
 
 print(f"""
 Your stats are the following:
@@ -175,5 +216,3 @@ Your stats are the following:
 
 
 print(f"Good Hunting {kin}!")
-
-```

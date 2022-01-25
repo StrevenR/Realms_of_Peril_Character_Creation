@@ -1,0 +1,32 @@
+Goal of the program:
+Allow a user to create a character for the RPG Realms of Peril with minimal keyed entries.
+
+Order of events:
+  Open the program
+  Preset blank form
+  Prompt the following
+    #Enter or randomly generate(3d6) rating for 
+    
+    #Enter or Randomly generate (d12) Kin
+   
+    (input) Enter or Randomly generate Background (changes based on kin)
+      Display the rules associated with background on form
+    Describe Character
+    (input) Roll, choose, or create descriptors that help to describe your character’s appearance and personality.
+    Display on form
+    (input) Roll, choose, or create a name for your character.
+    Display on form
+    Determine HP and Max Heavy
+    Display on form
+    (input) Enter or randomly roll starting money
+    Display on form
+    (input) Purchase items & assign inventory slot
+    Have multiple fields 
+    Check # of heavys that can be held do not allow more than is possible
+    Export as PDF file or text file that could be used in future development
+
+
+Things I need:
+GUI (entering things, up down ticks, display attributes)
+Graphic Outputs (PDF)
+“Tables” to store data
