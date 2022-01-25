@@ -10,9 +10,8 @@ input_timer = .75
 #time between sections
 Section_Timer = 2
 
-def roll() :
+def stat_roll() :
   return random.randint(1,6)+random.randint(1,6) + random.randint(1,6)
-
 
 def get_and_validate_stat(stat):
   valid_stat = False
@@ -46,7 +45,7 @@ def y_n_prompt(text):
      valid_input = True
      return y_n_answer
    else:
-     print("Please enter Yes No: ")
+     print("Please enter Yes or No: ")
 
 stats_prompt = y_n_prompt("roll for your stats")
 
@@ -54,23 +53,23 @@ stats_prompt = y_n_prompt("roll for your stats")
 if stats_prompt == True: 
   print("Ok let's see what you get...")
   time.sleep(2)
-  agility = roll()
+  agility = stat_roll()
   print(f"  Your agility is {agility}.")
  
   time.sleep(Roll_Timer)
-  charisma = roll()
+  charisma = stat_roll()
   print(f"  Your charisma is {charisma}.")
   
   time.sleep(Roll_Timer)
-  intellect = roll()
+  intellect = stat_roll()
   print(f"  Your intellect is {intellect}.")
   
   time.sleep(Roll_Timer)
-  perception = roll()
+  perception = stat_roll()
   print(f"  Your perception is {perception}.")
   
   time.sleep(Roll_Timer)
-  strength = roll()
+  strength = stat_roll()
   print(f"  Your strength is {strength}.")
 
 #Manually Entered
@@ -82,12 +81,10 @@ elif stats_prompt == False:
   
   agility = get_and_validate_stat("agility")
 
-
   time.sleep(input_timer)
   #charisma =int(input("Enter your Charisma stat: "))
   
   charisma = get_and_validate_stat("charisma")
-
 
   time.sleep(input_timer)
   #intellect =int(input("Enter your Intellect stat: "))
@@ -102,11 +99,9 @@ elif stats_prompt == False:
   time.sleep(input_timer)
   #strength =int(input("Enter your Strength stat: "))
   strength = get_and_validate_stat("strength")
-  print("Calculating values now....")
 
 else:
   print("Please enter Yes or No.")
-  
 
 def stat_rating_calc(stat):
   #This should be some type of formula instead of a dict I think. Didn't feel like doing the math at the time - SA 1/21/22  
@@ -171,7 +166,6 @@ time.sleep(Section_Timer)
 
 background_prompt = y_n_prompt('roll for your backgrounds')
 
-
 #Human
 #halfling
 #dwarf
@@ -192,14 +186,40 @@ time.sleep(Section_Timer)
 
 money_prompt = y_n_prompt('roll for your starting coins')
 
-#Determine HP and Max Heavy
+if money_prompt == True:
+  starting_coins = (random.randint(1,6)+random.randint(1,6)+random.randint(1,6))*10
+  print(f"You have {starting_coins} coins for your journey.")
+else:
+    starting_coins_check = False
+    while starting_coins_check == False:
+      starting_coins = int(input("Enter number of coins between 30 and 180: "))
+      if starting_coins < 30:
+        print("You aren't that poor.")
+      elif starting_coins > 180:
+        print("No one that rich is going adventuring.")
+      else:
+        starting_coins_check = True
+
+time.sleep(Section_Timer)
+
+max_hp = stat_rating_calc(strength) + 10
+
+def heavy(str):
+  if stat_rating_calc(strength) >= 0:
+    max_heavy = stat_rating_calc(strength) + 1
+  else:
+    max_heavy = 1
+
+  return max_heavy
+
+max_heavy = heavy(stat_rating_calc(strength))
 
 name_prompt = y_n_prompt('roll for a random name')
 
 time.sleep(Section_Timer)
 
 print("""
-Ok let's get this all together
+Ok let's get this all together...
 """)
 
 print(f"""
@@ -210,9 +230,12 @@ Your stats are the following:
   Perception: {perception} | {stat_rating_calc(perception)}
   Strength:   {strength} | {stat_rating_calc(strength)}
 
- You hail from the {kin} lands.
+Your maximum HP is {max_hp}.
+
+You can carry at most {max_heavy} heavy item(s) unaided.
+
+You hail from the {kin} lands and left with {starting_coins} coins in your pocket.
 
 """)
-
 
 print(f"Good Hunting {kin}!")
