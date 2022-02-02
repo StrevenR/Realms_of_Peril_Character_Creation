@@ -7,6 +7,7 @@ authors = ["StrevenR <<>>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 pandas = "^1.4.0"
+Flask = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 

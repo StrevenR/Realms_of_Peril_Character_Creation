@@ -271,14 +271,72 @@ else:
 
 time.sleep(Section_Timer)
 
-#description_prompt = y_n_prompt('roll for your descriptors')
+attitude = ""
+hair = ""
+face = ""
+eyes = ""
+body = ""
+quirk = ""
 
-#Attitude
-#hair
-#face
-#eyes
-#body
-#quirk
+description_prompt = y_n_prompt('roll for your descriptors')
+
+if description_prompt == True:
+  if kin == "human":
+    attitude_roll = int(random.randint(0,99))
+    from human_info import human_attitude
+    attitude = human_attitude[attitude_roll]
+
+    hair_roll = int(random.randint(0,19))
+    from human_info import human_hair
+    hair = human_hair[hair_roll]
+
+    face_roll = int(random.randint(0,19))
+    from human_info import human_face
+    face = human_face[face_roll]
+
+    eyes_roll = int(random.randint(0,19))
+    from human_info import human_eyes
+    eyes = human_eyes[eyes_roll]
+
+    body_roll = int(random.randint(0,19))
+    from human_info import human_body
+    body = human_body[body_roll]
+
+    quirk_roll = int(random.randint(0,99))
+    from human_info import human_quirk
+    quirk = human_quirk[quirk_roll]
+
+  elif kin == "elf":
+    attitude = "elf"
+    hair = "elf"
+    face = "elf"
+    eyes = "elf"
+    body = "elf"
+    quirk = "elf"
+  
+  elif kin == "dwarf":
+    attitude = "dwarf"
+    hair = "dwarf"
+    face = "dwarf"
+    eyes = "dwarf"
+    body = "dwarf"
+    quirk = "dwarf"
+  
+  elif kin == "halfling":
+    attitude = "halfling"
+    hair = "halfling"
+    face = "halfling"
+    eyes = "halfling"
+    body = "halfling"
+    quirk = "halfling"
+
+else:
+  attitude = input("Your attitude could be decribed as: ")
+  hair = input("Your hair is: ")
+  face = input("Your face is: ")
+  eyes = input("Your eyes are: ")
+  body = input("Your frame is: ")
+  quirk = input("Your defining personality trait is your: ")
 
 time.sleep(Section_Timer)
 
@@ -362,7 +420,20 @@ Your maximum HP is {max_hp}.
 
 You can carry at most {max_heavy} heavy item(s) unaided.
 
-Your name is {name}. You hail from the {kin} lands and left with {starting_coins} coins in your pocket. You were a {background_name}. {background_description}
+Your name is {name}. You hail from the {kin} lands 
+
+{attitude}
+{hair}
+{face}
+{eyes}
+{body}
+{quirk}
+
+You were a {background_name}. {background_description}
+
+
+
+With {starting_coins} coins in your pocket you set off on your journey.
 
 """)
 
