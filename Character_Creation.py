@@ -321,7 +321,7 @@ name_prompt = y_n_prompt('roll for a random name')
 if name_prompt == True:
     if kin == "human":
         from human_info import human_names
-        name_roll = random.randint(0, 19)
+        name_roll = random.randint(0, 99)
         name = human_names[name_roll]
 
     if kin == "dwarf":
@@ -350,7 +350,7 @@ Ok let's get this all together...
 
 time.sleep(Thought_Timer)
 
-print(f"""
+character_profile = (f"""
 Your stats are the following:
   Agility:    {agility} | {stat_rating_calc(agility)}
   Charisma:   {charisma} | {stat_rating_calc(charisma)}
